@@ -3,7 +3,7 @@ import FilmCard from './FilmCard'
 
 const App = () => {
 
-  const [filmList, setFilmList] = useState([])
+  const [filmList, setFilmList] = useState('')
 
   const filmFetcher = async () => {
     try {
@@ -37,11 +37,12 @@ const App = () => {
     }
   }, [])
 
+  console.log(filmList)
+
 
     return (
     <div>
-    {
-    filmList.map(film => <FilmCard film={film} />)
+    { filmList && filmList.map(film => <FilmCard film={film} />)
     }  
     </div>
   );
