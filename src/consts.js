@@ -1,3 +1,3 @@
-const filmUrl = 'https://swapi.dev/api/films/'
+const SWAPI_URL = "https://swapi.dev/api/films/";
 
-export default filmUrl
+export default SWAPI_URL;
