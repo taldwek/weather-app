@@ -6,23 +6,23 @@ const Card = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+  align-items: flex-start;
   border: 4px solid yellow;
-  margin: 50px;
   height: 300px;
-  width: 400px;
+  width: 90%;
+  padding: 0 20px;
 `;
 
 const Button = styled.div`
   position: absolute;
-  height: 40px;
-  width: 40px;
-  margin: 4px;
+  height: 50px;
+  width: 50px;
+  margin: 10px;
   top: 0;
   right: 0;
   background: url(${likeButton}) no-repeat center center;
   background-size: cover ;
   `
-
 
 const FilmCard = (props) => {
   const {
@@ -43,11 +43,11 @@ const FilmCard = (props) => {
 
   return (
     <Card>
-      <div>Title: {title}</div>
+      <h3>{title}</h3>
       <div>Release Date: {release_date}</div>
+      <div>Episode: {episode_id}</div>
+      <div>Director: {director}</div>
       <div>Producer: {producer}</div>
-      <div>director: {director}</div>
-      <div>Episode ID:{episode_id}</div>
       {/* <div>{opening_crawl}</div> */}
       <Button />
     </Card>

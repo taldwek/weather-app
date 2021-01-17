@@ -13,9 +13,9 @@ const AppHeader = styled.div`
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 40px;
-  color: white;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 70px;
+  margin: 50px;
 `;
 
 const App = () => {

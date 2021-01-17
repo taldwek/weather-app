@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100vh;
     margin: 0;
-    text-align: center;
     background-image: url(${img});
     color: white;
   }`
