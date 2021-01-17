@@ -1,6 +1,6 @@
 import SWAPI_URL from "../consts";
 
-const getFilmList = async () => {
+const getFilmList = async (setFilmList) => {
   const response = await (await fetch(SWAPI_URL)).json();
   const filmsArray = response.results.map((film) => {
     const {
@@ -24,9 +24,8 @@ const getFilmList = async () => {
     };
   });
   window.localStorage.setItem("filmsArray", JSON.stringify(filmsArray));
-  console.log(filmsArray)
-  // error handling for issue with local storage
-  return filmsArray;
+      // error handling for issue with local storage
+  setFilmList(filmsArray);
 };
 
 export default getFilmList;

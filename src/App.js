@@ -31,7 +31,7 @@ const App = () => {
     const filmsArray = window.localStorage.getItem("filmsArray");
     filmsArray
     ? setFilmList(JSON.parse(filmsArray))
-    : setFilmList(getFilmList());
+    : getFilmList(setFilmList);
   }, []);
   
   const favoriteToggle = (e) => {
@@ -47,10 +47,10 @@ const App = () => {
     });
     setFilmList(newFilmList);
   };
-
+  
   console.log(filmList)
-
-
+  
+  
   return (
     <div>
       <AppHeader>
