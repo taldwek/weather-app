@@ -19,11 +19,12 @@ const getFilmList = async () => {
       director,
       producer,
       release_date,
-      favourite: false,
+      favorite: false,
       backgroundImage: "to be added",
     };
   });
   window.localStorage.setItem("filmsArray", JSON.stringify(filmsArray));
+  console.log(filmsArray)
   // error handling for issue with local storage
   return filmsArray;
 };

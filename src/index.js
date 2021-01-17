@@ -7,7 +7,7 @@ import img from "./assets/images/background.jpg";
 const GlobalStyle = createGlobalStyle`
   body {
     height: 100vh;
-    margin: 0;
+    margin: auto 0;
     background-image: url(${img});
     color: white;
   }`

@@ -17,7 +17,7 @@ const Button = styled.div`
   position: absolute;
   height: 50px;
   width: 50px;
-  margin: 10px;
+  margin: 12px;
   top: 0;
   right: 0;
   background: url(${likeButton}) no-repeat center center;
@@ -32,9 +32,12 @@ const FilmCard = (props) => {
     director,
     producer,
     release_date,
-    favourite,
     backgroundImage,
   } = props.film;
+
+  const { favoriteToggle } = props
+
+
 
   // add favourite star that changes state of favourite attribute in app
   // add background image
@@ -49,7 +52,7 @@ const FilmCard = (props) => {
       <div>Director: {director}</div>
       <div>Producer: {producer}</div>
       {/* <div>{opening_crawl}</div> */}
-      <Button />
+      <Button id={episode_id} onClick={favoriteToggle} />
     </Card>
   );
 };
