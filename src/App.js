@@ -3,14 +3,7 @@ import FilmCard from "./components/FilmCard";
 import Header from "./Header";
 import getFilmList from "./utils/utils";
 import styled from "styled-components";
-import img from "./assets/images/background.jpg";
 
-const AppWrapper = styled.div`
-  height: 100vh;
-  text-align: center;
-  background-image: url(${img});
-  color: white;
-`;
 
 const AppHeader = styled.div`
   height: 100px;
@@ -21,6 +14,7 @@ const AppHeader = styled.div`
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 40px;
   color: white;
 `;
 
@@ -38,7 +32,7 @@ const App = () => {
   }, []);
 
   return (
-    <AppWrapper>
+    <div>
       <AppHeader>
         <Header />
       </AppHeader>
@@ -48,7 +42,7 @@ const App = () => {
           return <FilmCard key={film.episode_id} film={film} />;
         })}
         </Container>
-    </AppWrapper>
+    </div>
   );
 };
 

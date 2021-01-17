@@ -2,12 +2,23 @@ import styled from "styled-components";
 
 const Card = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   border: 4px solid yellow;
-  margin: 40px;
-  height: 400px;
+  margin: 50px;
+  height: 300px;
   width: 400px;
 `;
+
+const Button = styled.button`
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  top: 0;
+  right: 0;
+  background-image: url('../assets/images/unlike-button')
+  `
+
 
 const FilmCard = (props) => {
   const {
@@ -24,16 +35,17 @@ const FilmCard = (props) => {
   // add favourite star that changes state of favourite attribute in app
   // add background image
   // clicking on card takes user to film page
+  // add an on hover that show the opening_crawl crawling
 
   return (
     <Card>
-      <div>{title}</div>
-      <div>{release_date}</div>
-      <div>{producer}</div>
-      <div>{director}</div>
-      <div>{episode_id}</div>
+      <div>Title: {title}</div>
+      <div>Release Date: {release_date}</div>
+      <div>Producer: {producer}</div>
+      <div>director: {director}</div>
+      <div>Episode ID:{episode_id}</div>
       {/* <div>{opening_crawl}</div> */}
-      <button>Favoruite Star</button>
+      <Button />
     </Card>
   );
 };
