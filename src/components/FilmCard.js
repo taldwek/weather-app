@@ -1,11 +1,24 @@
+import styled from "styled-components";
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 4px solid yellow;
+  margin: 40px;
+  height: 400px;
+  width: 400px;
+`;
+
 const FilmCard = (props) => {
   const {
     title,
-    releaseDate,
-    producer,
+    episode_id,
+    opening_crawl,
     director,
-    epidosdeId,
-    description,
+    producer,
+    release_date,
+    favourite,
+    backgroundImage,
   } = props.film;
 
   // add favourite star that changes state of favourite attribute in app
@@ -13,15 +26,15 @@ const FilmCard = (props) => {
   // clicking on card takes user to film page
 
   return (
-    <div className="film-card">
+    <Card>
       <div>{title}</div>
-      <div>{releaseDate}</div>
+      <div>{release_date}</div>
       <div>{producer}</div>
       <div>{director}</div>
-      <div>{epidosdeId}</div>
-      <div>{description}</div>
+      <div>{episode_id}</div>
+      {/* <div>{opening_crawl}</div> */}
       <button>Favoruite Star</button>
-    </div>
+    </Card>
   );
 };
 
