@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import likeButton from "../assets/images/like-button.png";
+import unlikeButton from "../assets/images/unlike-button.svg";
 
 const Card = styled.div`
   display: flex;
@@ -10,13 +12,15 @@ const Card = styled.div`
   width: 400px;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
   position: absolute;
   height: 40px;
   width: 40px;
+  margin: 4px;
   top: 0;
   right: 0;
-  background-image: url('../assets/images/unlike-button')
+  background: url(${likeButton}) no-repeat center center;
+  background-size: cover ;
   `
 
 
