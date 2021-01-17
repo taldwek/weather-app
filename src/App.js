@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FilmCard from "./components/FilmCard";
 import Header from "./Header";
-import getFilmList from "./utils/utils";
+import { getAndSetFilmList, saveListToLS, updateFilmArray } from "./utils/utils";
 import styled from "styled-components";
 
 const AppHeader = styled.div`
@@ -21,36 +21,24 @@ const Container = styled.div`
 
 const App = () => {
   const [filmList, setFilmList] = useState([]);
-  
+
   // when film array returns empty need to show 'Page Under Maintenance' - how to do it
   // divide into header and container
-  
-  
+
   useEffect(() => {
-    
     const filmsArray = window.localStorage.getItem("filmsArray");
-    filmsArray
-    ? setFilmList(JSON.parse(filmsArray))
-    : getFilmList(setFilmList);
+    filmsArray ? setFilmList(JSON.parse(filmsArray)) : getAndSetFilmList(setFilmList);
   }, []);
-  
+
   const favoriteToggle = (e) => {
-    const { id } = e.target;
-    const newFilmList = filmList.map((film) => {
-      if (film.episode_id === parseInt(id)) {
-        const newFilm = { ...film };
-        newFilm.favorite = !newFilm.favorite;
-        return newFilm;
-      } else {
-        return film;
-      }
-    });
+    console.log(filmList)
+    const newFilmList =  updateFilmArray(e, filmList);
+    saveListToLS(newFilmList);
     setFilmList(newFilmList);
   };
-  
-  console.log(filmList)
-  
-  
+
+  console.log(filmList);
+
   return (
     <div>
       <AppHeader>

@@ -1,6 +1,24 @@
 import SWAPI_URL from "../consts";
 
-const getFilmList = async (setFilmList) => {
+const updateFilmArray = (e, filmList) => {
+  const { id } = e.target;
+  const newFilmList = filmList.map((film) => {
+    if (film.episode_id === parseInt(id)) {
+      const newFilm = { ...film };
+      newFilm.favorite = !newFilm.favorite;
+      return newFilm;
+    } else {
+      return film;
+    }
+  });
+  return newFilmList;
+};
+
+const saveListToLS = (list) => {
+  window.localStorage.setItem("filmsArray", JSON.stringify(list));
+};
+
+const getAndSetFilmList = async (setFilmList) => {
   const response = await (await fetch(SWAPI_URL)).json();
   const filmsArray = response.results.map((film) => {
     const {
@@ -23,9 +41,10 @@ const getFilmList = async (setFilmList) => {
       backgroundImage: "to be added",
     };
   });
-  window.localStorage.setItem("filmsArray", JSON.stringify(filmsArray));
-      // error handling for issue with local storage
+
+  // error handling for issue with local storage
+  saveListToLS(filmsArray);
   setFilmList(filmsArray);
 };
 
-export default getFilmList;
+export { getAndSetFilmList, saveListToLS, updateFilmArray };

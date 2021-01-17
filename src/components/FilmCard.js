@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import likeButton from "../assets/images/like-button.png";
-import unlikeButton from "../assets/images/unlike-button.svg";
+import unlikeButton from "../assets/images/like-button.png";
+import likeButton from "../assets/images/unlike-button.svg";
 
 const Card = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: flex-start;
-  border: 4px solid yellow;
   height: 300px;
   width: 90%;
   padding: 0 20px;
+  background: #415141b0;  
+
 `;
 
 const Button = styled.div`
@@ -20,8 +21,8 @@ const Button = styled.div`
   margin: 12px;
   top: 0;
   right: 0;
-  background: url(${likeButton}) no-repeat center center;
-  background-size: cover ;
+  background: ${props => props.favorite === false ? `url(${likeButton}) no-repeat center center;` : `url(${unlikeButton}) no-repeat center center;`} 
+  background-size: cover;
   `
 
 const FilmCard = (props) => {
@@ -33,6 +34,7 @@ const FilmCard = (props) => {
     producer,
     release_date,
     backgroundImage,
+    favorite
   } = props.film;
 
   const { favoriteToggle } = props
@@ -52,7 +54,7 @@ const FilmCard = (props) => {
       <div>Director: {director}</div>
       <div>Producer: {producer}</div>
       {/* <div>{opening_crawl}</div> */}
-      <Button id={episode_id} onClick={favoriteToggle} />
+      <Button favorite={favorite} id={episode_id} onClick={favoriteToggle} />
     </Card>
   );
 };
