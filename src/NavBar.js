@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
-const NavBarWrapper = styled.div`
+const NavBarWrapper = styled.nav`
   display: flex;
+  position: fixed;
+  z-index: 2147483647;
   align-items: center;
   justify-content: flex-start;
-  height: 70px;
-  background-color: #0a1612a3;
-  font-weight: 1.1em;`
+  height: 80px;
+  width: 100%;
+  background-color: rgb(1,1,1);
+  font-weight: 1.1em;
+  top: 0`
 
   const NavBarLink = styled.a`
   color: #FFE81F;
@@ -14,7 +18,6 @@ const NavBarWrapper = styled.div`
   height: 100%;
   align-items: center;
   padding-left: 40px;
-  
   padding-right: 10px;
   &:hover {
     cursor: pointer;

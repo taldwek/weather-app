@@ -5,13 +5,15 @@ import { getFilmList, updateAndSaveFilmList } from "./services/filmServices";
 import styled from "styled-components";
 
 const Container = styled.div`
-  display: grid;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  grid-template-columns: repeat(auto-fill, 450px);
-  grid-gap: 60px;
+  // grid-template-columns: 1
+  // grid-template-columns: repeat(auto-fill, 450px);
+  // grid-gap: 60px;
   margin-bottom: 30px;
-  margin-top:30px;
+  margin-top:80px;
 `;
 
 const App = () => {
