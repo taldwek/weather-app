@@ -1,5 +1,18 @@
 import SWAPI_URL from "../consts";
 
+const updateAndSaveFilmList = (e, filmList, setFilmList,) => {
+  const newFilmList = updateFilmArray(e, filmList);
+  saveFilmListToLS(newFilmList);
+  setFilmList(newFilmList);
+}
+
+const getFilmList = (setFilmList) => {
+  const filmsArray = window.localStorage.getItem("filmsArray");
+  filmsArray
+    ? setFilmList(JSON.parse(filmsArray))
+    : getAndSetFilmList(setFilmList);
+};
+
 const updateFilmArray = (e, filmList) => {
   const { id } = e.target;
   const newFilmList = filmList.map((film) => {
@@ -14,7 +27,7 @@ const updateFilmArray = (e, filmList) => {
   return newFilmList;
 };
 
-const saveListToLS = (list) => {
+const saveFilmListToLS = (list) => {
   window.localStorage.setItem("filmsArray", JSON.stringify(list));
 };
 
@@ -42,9 +55,12 @@ const getAndSetFilmList = async (setFilmList) => {
     };
   });
 
-  // error handling for issue with local storage
-  saveListToLS(filmsArray);
+  saveFilmListToLS(filmsArray);
   setFilmList(filmsArray);
 };
 
-export { getAndSetFilmList, saveListToLS, updateFilmArray };
+const filmCardBackground = (episode_id) => {
+  
+}
+
+export { getFilmList, getAndSetFilmList, updateAndSaveFilmList, saveFilmListToLS, updateFilmArray };
