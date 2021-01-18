@@ -3,7 +3,7 @@ import FilmCard from "./components/FilmCard";
 import NavBar from "./components/NavBar";
 import WelcomeModal from "./components/WelcomeModal";
 import styled from "styled-components";
-import { setFilmListHandler, updateAndSaveFilmList } from "./services/filmServices";
+import { getCachedFilmList, updateAndSaveFilmList } from "./services/filmServices";
 import setShowModalHandler from "./services/modalServices"
 
 const Container = styled.div`
@@ -22,13 +22,15 @@ const App = () => {
   const [filmList, setFilmList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-
   useState(() => {
     setShowModal(setShowModalHandler())
   });
 
   useEffect(() => {
-    setFilmListHandler(setFilmList);
+    (async function () {
+      const films = await getCachedFilmList()
+      setFilmList(films)
+    })()
   }, []);
 
   const favoriteToggle = (e) => {

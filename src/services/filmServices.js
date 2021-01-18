@@ -1,4 +1,4 @@
-import SWAPI_URL from "../consts";
+import SWAPI_URL from "../consts.js";
 
 const updateAndSaveFilmList = (e, filmList, setFilmList) => {
   const newFilmList = updateFilmArray(e, filmList);
@@ -6,14 +6,20 @@ const updateAndSaveFilmList = (e, filmList, setFilmList) => {
   setFilmList(newFilmList);
 };
 
+const fetchFilmList = async () => await (await fetch(SWAPI_URL)).json();
+
 const getListFromLS = () => window.localStorage.getItem('filmsArray');
 
-const setFilmListHandler = (setFilmList) => {
+const getCachedFilmList = async () => {
   const filmsArray = getListFromLS();
-  filmsArray
-    ? setFilmList(JSON.parse(filmsArray))
-    : getAndSetFilmList(setFilmList);
+  if(!filmsArray) {
+    const films = fetchFilmList();
+    saveFilmListToLS(films);
+    return films;
+  }
+  return JSON.parse(filmsArray)
 };
+
 
 const updateFilmArray = (e, filmList) => {
   const { id } = e.target;
@@ -33,8 +39,9 @@ const saveFilmListToLS = (list) => {
   window.localStorage.setItem("filmsArray", JSON.stringify(list));
 };
 
+
 const getAndSetFilmList = async (setFilmList) => {
-  const response = await (await fetch(SWAPI_URL)).json();
+  const response = fetchFilmList()
   const filmsArray = response.results.map((film) => {
     const {
       title,
@@ -58,11 +65,11 @@ const getAndSetFilmList = async (setFilmList) => {
   });
 
   saveFilmListToLS(filmsArray);
-  setFilmList(filmsArray);
+  return filmsArray;
 };
 
 export {
-  setFilmListHandler,
+  getCachedFilmList,
   getAndSetFilmList,
   updateAndSaveFilmList,
   saveFilmListToLS,
