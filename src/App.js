@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FilmCard from "./components/FilmCard";
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
+import WelcomeModal from "./components/WelcomeModal";
 import { getFilmList, updateAndSaveFilmList } from "./services/filmServices";
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ const App = () => {
 
   return (
     <div>
+      <WelcomeModal />
       <NavBar />
       <Container>
         {filmList.length &&

@@ -8,7 +8,7 @@ const NavBarWrapper = styled.nav`
   justify-content: flex-start;
   height: 80px;
   width: 100%;
-  background-color: rgb(1,1,1);
+  background-color: rgb(1,1,1,0.9);
   font-weight: 1.1em;
   top: 0`
 
