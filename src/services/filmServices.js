@@ -1,13 +1,15 @@
 import SWAPI_URL from "../consts";
 
-const updateAndSaveFilmList = (e, filmList, setFilmList,) => {
+const updateAndSaveFilmList = (e, filmList, setFilmList) => {
   const newFilmList = updateFilmArray(e, filmList);
   saveFilmListToLS(newFilmList);
   setFilmList(newFilmList);
-}
+};
 
-const getFilmList = (setFilmList) => {
-  const filmsArray = window.localStorage.getItem("filmsArray");
+const getListFromLS = () => window.localStorage.getItem('filmsArray');
+
+const setFilmListHandler = (setFilmList) => {
+  const filmsArray = getListFromLS();
   filmsArray
     ? setFilmList(JSON.parse(filmsArray))
     : getAndSetFilmList(setFilmList);
@@ -59,8 +61,11 @@ const getAndSetFilmList = async (setFilmList) => {
   setFilmList(filmsArray);
 };
 
-const filmCardBackground = (episode_id) => {
-  
-}
-
-export { getFilmList, getAndSetFilmList, updateAndSaveFilmList, saveFilmListToLS, updateFilmArray };
+export {
+  setFilmListHandler,
+  getAndSetFilmList,
+  updateAndSaveFilmList,
+  saveFilmListToLS,
+  updateFilmArray,
+  getListFromLS
+};

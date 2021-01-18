@@ -51,15 +51,15 @@ const ModalButton = styled.button`
   }
 `
 
-const WelcomeModal = () => {
+const WelcomeModal = ({closeModal}) => {
   return (
-    <ModalWrapper>
-      <ModalContent>
+    <ModalWrapper onClick={closeModal}>
+      <ModalContent onClick={e => e.stopPropagation()}>
         <h1>Welcome to the world of Star Wars!</h1>
         <p>
           Browse through and save your favourite films using the star icon
         </p>
-        <ModalButton>Let's Begin!</ModalButton>
+        <ModalButton onClick={closeModal}>Let's Begin!</ModalButton>
       </ModalContent>
     </ModalWrapper>
   );
