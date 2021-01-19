@@ -1,6 +1,7 @@
+import React from "react"
 import styled from "styled-components";
-import unlikeButton from "../assets/images/like-button.png";
-import likeButton from "../assets/images/unlike-button.svg";
+import unlikeButton from "../assets/images/solid-star.svg";
+import likeButton from "../assets/images/regular-star.svg";
 
 const Card = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const Card = styled.div`
   box-shadow: 1px 1px 1px 1px #55565247 inset;
 `;
 
-const Button = styled.div`
+const FavoriteButton = styled.div`
   role: button;
   position: absolute;
   height: 50px;
@@ -50,7 +51,7 @@ const Fadeout = styled.div`
   bottom: 0;
   width: 100%;
   height: 50px;
-  background: -webkit-linear-gradient(
+  background: linear-gradient(
     rgba(40, 39, 39, 0) 0%,
     rgba(40, 39, 39, 1) 100%
   );
@@ -70,8 +71,6 @@ const FilmCard = (props) => {
 
   const { favoriteToggle } = props;
 
-  // clicking on card takes user to film page
-
   return (
     <Card>
       <h4>{title}</h4>
@@ -84,7 +83,7 @@ const FilmCard = (props) => {
         <Fadeout></Fadeout>
       </Crawl>
       <div>{movieImage}</div>
-      <Button favorite={favorite} id={episode_id} onClick={favoriteToggle} />
+      <FavoriteButton favorite={favorite} id={episode_id} onClick={favoriteToggle} />
     </Card>
   );
 };

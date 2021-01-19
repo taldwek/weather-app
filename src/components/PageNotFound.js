@@ -1,3 +1,4 @@
+import React from "react"
 import { Container, ErrorMessage } from "../styles/genericStyles";
 
 const PageNotFound = () => {
