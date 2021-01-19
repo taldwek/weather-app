@@ -24,13 +24,8 @@ const App = () => {
 
   useEffect(() => {
     (async function () {
-      try {
-        const films = await getAllFilms();
-        setAllFilmsList(films);
-      } catch (err) {
-        console.log(err);
-        setErrorInFetch(true);
-      }
+      const films = await getAllFilms();
+      films.length ? setAllFilmsList(films) : setErrorInFetch(true);
     })();
   }, []);
 

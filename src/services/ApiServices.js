@@ -1,8 +1,14 @@
 import SWAPI_URL from "../consts.js";
 
 const fetchAllFilms = async () => {
-
-  const response = await (await fetch(SWAPI_URL)).json();
+  let listfromAPI = null
+  try {
+   listfromAPI = await fetch(SWAPI_URL)
+  } catch (err) {
+    console.log(err)
+    return []
+  }
+  const response = await listfromAPI.json();
   const filmsArray = response.results.map(
     ({
       title,

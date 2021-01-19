@@ -11,13 +11,13 @@ const getAllFilms = async () => {
 };
 
 const saveListToLS = (list) => {
-  list.length && window.localStorage.setItem("filmsArray", JSON.stringify(list))
+  list.length &&
+    window.localStorage.setItem("filmsArray", JSON.stringify(list));
 };
 
 const getListFromLS = () => {
   return window.localStorage.getItem("filmsArray");
 };
-
 
 const updateFavoriteStateInList = (id, filmList) => {
   const newFilmList = updateFilmArray(id, filmList);
@@ -44,10 +44,26 @@ const getFavoriteFilms = (filmsArray) => {
   return favoriteFilms;
 };
 
+const errorToDisplay = (error, filmList) => {
+  if (error) {
+    return (
+      <h2>
+        Oooops, it seems like we're having issues with retrieving data at this
+        time. Please come back later!
+      </h2>
+    );
+  } else if (!filmList.length) {
+    return <h2>You still don't have any favorites :(</h2>;
+  } else {
+    return null;
+  }
+};
+
 export {
   updateFavoriteStateInList,
   getAllFilms,
   updateFilmArray,
   getListFromLS,
   getFavoriteFilms,
+  errorToDisplay,
 };
