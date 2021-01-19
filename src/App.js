@@ -14,6 +14,7 @@ const App = () => {
   const [allFilmsList, setAllFilmsList] = useState([]);
   const [favoriteFilmsList, setFavoriteFilmsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [errorInFetch, setErrorInFetch] = useState(false)
 
   useEffect(() => {
     setShowModal(setShowModalHandler());
@@ -21,8 +22,12 @@ const App = () => {
 
   useEffect(() => {
     (async function () {
+      try {
       const films = await getAllFilms();
       setAllFilmsList(films);
+      } catch(err) {
+        err === "TypeError: Failed to fetch" && setErrorInFetch(true)
+      }
     })();
   }, []);
 
@@ -42,7 +47,7 @@ const App = () => {
       <div>
         {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
         <NavBar />
-        <Redirect from="/" to="/home" />
+        <Redirect from="/" to="/home" />       
         <Route
           exact
           path="/home"

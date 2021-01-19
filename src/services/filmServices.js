@@ -1,3 +1,4 @@
+import { isElementOfType } from "react-dom/test-utils";
 import fetchAllFilms from "./ApiServices";
 
 const getAllFilms = async () => {
@@ -11,7 +12,7 @@ const getAllFilms = async () => {
 };
 
 const saveListToLS = (list) => {
-  window.localStorage.setItem("filmsArray", JSON.stringify(list));
+  list.length && window.localStorage.setItem("filmsArray", JSON.stringify(list))
 };
 
 const getListFromLS = () => {
