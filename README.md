@@ -30,7 +30,7 @@ React's react-router-dom package was used for route management
 * Styled Components
 
 ### Implementation of Requirements
-* Core requirement - user will be able to see and save as favorites films, the list of favorite films will persist after page refresh:
+* Core requirement - user will be able to see and save as favorites films, indication of favorite films will persist after page refresh:
     * on loading of the app, the Local Storage is checked for the existence of a 'filmArray' item, if it does not exist (meaning this is the first visit) the list of all films is retrieved from the SWAPI API, and a 'favorite: false' entry is added to each film
     * The list is presented in the Home page
     * If the user clicks on the Like icon, a function for updating the 'favorite' propery of that film is called, after which the new array is saved to Local Storage and the filmList state is updated
