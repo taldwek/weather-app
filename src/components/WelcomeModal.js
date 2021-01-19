@@ -3,7 +3,7 @@ import { ModalWrapper, ModalContent } from "../styles/genericStyles";
 
 const ModalButton = styled.button`
   font-family: inherit;
-  font-size: 1em;
+  font-size: 1.1em;
   border: 0;
   padding: 0;
   width: 120px;

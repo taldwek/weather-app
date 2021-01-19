@@ -6,12 +6,11 @@ import {
   Switch,
 } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import FetchErrorModal from "./components/FetchErrorModal";
 import WelcomeModal from "./components/WelcomeModal";
 import CardContainer from "./pages/CardContainer";
 import {
   getAllFilms,
-  toggleFavorite,
+  updateFavoriteStateInList,
   getFavoriteFilms,
 } from "./services/filmServices";
 import setShowModalHandler from "./services/modalServices";
@@ -21,7 +20,6 @@ const App = () => {
   const [allFilmsList, setAllFilmsList] = useState([]);
   const [favoriteFilmsList, setFavoriteFilmsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showNavBar, setShowNavBar] = useState(false);
   const [errorInFetch, setErrorInFetch] = useState(false);
 
   useEffect(() => {
@@ -37,15 +35,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      !errorInFetch && setShowNavBar(true);
-    }, 200);
-  }, [errorInFetch]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowModal(setShowModalHandler());
-    }, 200);
+    const isNewUser = setShowModalHandler();
+    setShowModal(isNewUser);
   }, []);
 
   useEffect(() => {
@@ -55,45 +46,42 @@ const App = () => {
 
   const favoriteToggle = (e) => {
     const { id } = e.target;
-    const newList = toggleFavorite(id, allFilmsList);
+    const newList = updateFavoriteStateInList(id, allFilmsList);
     setAllFilmsList(newList);
   };
 
   return (
     <Router>
-      {errorInFetch ? (
-        <FetchErrorModal />
-      ) : (
-        <div>
-          {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
-          {showNavBar && <NavBar />}
-          <Switch>
-            <Redirect from="/" to="/home" exact />
-            <Route
-              exact
-              path="/home"
-              render={() => (
-                <CardContainer
-                  filmList={allFilmsList}
-                  favoriteToggle={favoriteToggle}
-                />
-              )}
-            />
-
-            <Route
-              exact
-              path="/favorites"
-              render={() => (
-                <CardContainer
-                  filmList={favoriteFilmsList}
-                  favoriteToggle={favoriteToggle}
-                />
-              )}
-            />
-            <PageNotFound />
-          </Switch>
-        </div>
-      )}
+      <div>
+        {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
+        <NavBar />
+        <Switch>
+          <Redirect from="/" to="/home" exact />
+          <Route
+            exact
+            path="/home"
+            render={() => (
+              <CardContainer
+                errorInFetch={errorInFetch}
+                filmList={allFilmsList}
+                favoriteToggle={favoriteToggle}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/favorites"
+            render={() => (
+              <CardContainer
+                errorInFetch={errorInFetch}
+                filmList={favoriteFilmsList}
+                favoriteToggle={favoriteToggle}
+              />
+            )}
+          />
+          <PageNotFound />
+        </Switch>
+      </div>
     </Router>
   );
 };

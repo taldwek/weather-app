@@ -1,4 +1,3 @@
-import { isElementOfType } from "react-dom/test-utils";
 import fetchAllFilms from "./ApiServices";
 
 const getAllFilms = async () => {
@@ -20,7 +19,7 @@ const getListFromLS = () => {
 };
 
 
-const toggleFavorite = (id, filmList) => {
+const updateFavoriteStateInList = (id, filmList) => {
   const newFilmList = updateFilmArray(id, filmList);
   saveListToLS(newFilmList);
   return newFilmList;
@@ -46,7 +45,7 @@ const getFavoriteFilms = (filmsArray) => {
 };
 
 export {
-  toggleFavorite,
+  updateFavoriteStateInList,
   getAllFilms,
   updateFilmArray,
   getListFromLS,
