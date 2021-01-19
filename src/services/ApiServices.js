@@ -19,8 +19,7 @@ const fetchAllFilms = async () => {
         director,
         producer,
         release_date,
-        favorite: false,
-        imageURL: "to be added",
+        favorite: false
       };
     }
   );

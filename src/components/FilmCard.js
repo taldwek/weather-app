@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import unlikeButton from "../assets/images/like-button.png";
 import likeButton from "../assets/images/unlike-button.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-
-// fix the font awsome issue and use the star instead of the div
-// or just find a workaround and use the button
 
 const Card = styled.div`
   display: flex;
