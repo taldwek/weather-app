@@ -6,18 +6,26 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // grid-template-columns: 1
-  // grid-template-columns: repeat(auto-fill, 450px);
-  // grid-gap: 60px;
   margin-bottom: 30px;
   margin-top: 80px;
 `;
 
-const CardContainer = ({ filmList, favoriteToggle }) => {
+const NoFavsMessage = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -330px;
+`;
 
+const CardContainer = ({ filmList, favoriteToggle }) => {
   return (
     <Container>
-      {filmList.length &&
+      {!filmList.length ? (
+        <NoFavsMessage>
+          <h2>You still don't have any favorites :(</h2> 
+        </NoFavsMessage>
+      ) : (
         filmList.map((film) => {
           return (
             <FilmCard
@@ -26,7 +34,8 @@ const CardContainer = ({ filmList, favoriteToggle }) => {
               film={film}
             />
           );
-        })}
+        })
+      )}
     </Container>
   );
 };
