@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 import NavBar from "./components/NavBar";
+import ErrorPage from "./components/ErrorPage";
 import WelcomeModal from "./components/WelcomeModal";
 import CardContainer from "./pages/CardContainer";
 import {
@@ -14,7 +20,7 @@ const App = () => {
   const [allFilmsList, setAllFilmsList] = useState([]);
   const [favoriteFilmsList, setFavoriteFilmsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [errorInFetch, setErrorInFetch] = useState(false)
+  const [errorInFetch, setErrorInFetch] = useState(false);
 
   useEffect(() => {
     setShowModal(setShowModalHandler());
@@ -23,10 +29,11 @@ const App = () => {
   useEffect(() => {
     (async function () {
       try {
-      const films = await getAllFilms();
-      setAllFilmsList(films);
-      } catch(err) {
-        err === "TypeError: Failed to fetch" && setErrorInFetch(true)
+        const films = await getAllFilms();
+        setAllFilmsList(films);
+      } catch (err) {
+        console.log(err)
+        setErrorInFetch(true)
       }
     })();
   }, []);
@@ -44,31 +51,37 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
-        <NavBar />
-        <Redirect from="/" to="/home" />       
-        <Route
-          exact
-          path="/home"
-          render={() => (
-            <CardContainer
-              filmList={allFilmsList}
-              favoriteToggle={favoriteToggle}
+      {errorInFetch ? (
+        <ErrorPage />
+      ) : (
+        <div>
+          {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
+          <NavBar />
+          <Switch>
+            <Redirect from="/" to="/home" exact />
+            <Route
+              exact
+              path="/home"
+              render={() => (
+                <CardContainer
+                  filmList={allFilmsList}
+                  favoriteToggle={favoriteToggle}
+                />
+              )}
             />
-          )}
-        />
-        <Route
-          exact
-          path="/favorites"
-          render={() => (
-            <CardContainer
-              filmList={favoriteFilmsList}
-              favoriteToggle={favoriteToggle}
-            />
-          )}
-        />
-      </div>
+          </Switch>
+          <Route
+            exact
+            path="/favorites"
+            render={() => (
+              <CardContainer
+                filmList={favoriteFilmsList}
+                favoriteToggle={favoriteToggle}
+              />
+            )}
+          />
+        </div>
+      )}
     </Router>
   );
 };
