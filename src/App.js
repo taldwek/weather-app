@@ -20,11 +20,8 @@ const App = () => {
   const [allFilmsList, setAllFilmsList] = useState([]);
   const [favoriteFilmsList, setFavoriteFilmsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showNavBar, setShowNavBar] = useState(false);
   const [errorInFetch, setErrorInFetch] = useState(false);
-
-  useEffect(() => {
-    setShowModal(setShowModalHandler());
-  }, []);
 
   useEffect(() => {
     (async function () {
@@ -32,10 +29,22 @@ const App = () => {
         const films = await getAllFilms();
         setAllFilmsList(films);
       } catch (err) {
-        console.log(err)
-        setErrorInFetch(true)
+        console.log(err);
+        setErrorInFetch(true);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (errorInFetch) setShowNavBar(true);
+    }, 200);
+  }, [errorInFetch]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowModal(setShowModalHandler());
+    }, 200);
   }, []);
 
   useEffect(() => {
@@ -56,7 +65,7 @@ const App = () => {
       ) : (
         <div>
           {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
-          <NavBar />
+          {showNavBar && <NavBar />}
           <Switch>
             <Redirect from="/" to="/home" exact />
             <Route
