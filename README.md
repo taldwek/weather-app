@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Starwars World
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Installation
 
-## Available Scripts
+Clone and the starwars repository
+```
+$ git clone https://github.com/taldwek/starwars.git
+``` 
+Once cloning is complete - go into the created folder
+```
+$ cd starwars
+``` 
+Install dependencies
+```
+$ npm install
+``` 
+Run the 'start' script
+```
+$ npm start
+``` 
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Tech
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The following technologies were used in this project :
 
-### `yarn test`
+* ReactJS - using Functional Components, along with State and Effect Hooks in order to handle component states and side-effects. 
+React's react-router-dom package was used for route management
+* Styled Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Implementation of Requirements
+* Core requirement - user will be able to see and save as favorites films, the list of favorite films will persist after page refresh:
+    * on loading of the app, the Local Storage is checked for the existence of a 'filmArray' item, if it does not exist (meaning this is the first visit) the list of all films is retrieved from the SWAPI API, and a 'favorite: false' entry is added to each film
+    * The list is presented in the Home page
+    * If the user clicks on the Like icon, a function for updating the 'favorite' propery of that film is called, after which the new array is saved to Local Storage and the filmList state is updated
+    * On next visit the App will get the list of films from Local Storage, and display the favorite movies with a colored icon, and show only the favorite films in the Favorite page
+* Seprarion of concerns: 
+    * UI - handled by the React components. the App and CardContainer components are the only ones with state, while the rest of the components are stateless. 
+    * Logic - majority of the application logic can be found in the filmServices and modalServices files
+    * Data layers - handling and manipulation of data is done in the ApiServices file
+* Exception handling - the following use cases were covered:
+    * Wrong path - an error page is presented (routes in App are nested in a Switch component, and if no route mathces then a fallback component is rendered)
+    * API call fails/Server is down - an error is caught by a try...catch statement, and a relevant message is displayed
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
