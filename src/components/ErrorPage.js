@@ -38,7 +38,7 @@ const ErrorPage = () => {
     <ErrorPageWrapper>
       <ErrorPageContent>
         <h2>
-          Oooops, it seems like we're having issue with retrieving data at this
+          Oooops, it seems like we're having issues with retrieving data at this
           time. Please come back later!
         </h2>
       </ErrorPageContent>
