@@ -37,7 +37,7 @@ const App = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (!errorInFetch) setShowNavBar(true);
+      !errorInFetch && setShowNavBar(true);
     }, 200);
   }, [errorInFetch]);
 
