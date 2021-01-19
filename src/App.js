@@ -1,59 +1,70 @@
 import { useState, useEffect } from "react";
-import FilmCard from "./components/FilmCard";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import WelcomeModal from "./components/WelcomeModal";
-import styled from "styled-components";
-import { getCachedFilmList, updateAndSaveFilmList } from "./services/filmServices";
-import setShowModalHandler from "./services/modalServices"
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  // grid-template-columns: 1
-  // grid-template-columns: repeat(auto-fill, 450px);
-  // grid-gap: 60px;
-  margin-bottom: 30px;
-  margin-top: 80px;
-`;
+import CardContainer from "./pages/CardContainer";
+import {
+  getAllFilms,
+  toggleFavorite,
+  getFavoriteFilms,
+} from "./services/filmServices";
+import setShowModalHandler from "./services/modalServices";
 
 const App = () => {
-  const [filmList, setFilmList] = useState([]);
+  const [allFilmsList, setAllFilmsList] = useState([]);
+  const [favoriteFilmsList, setFavoriteFilmsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  useState(() => {
-    setShowModal(setShowModalHandler())
-  });
+  useEffect(() => {
+    setShowModal(setShowModalHandler());
+  }, []);
 
   useEffect(() => {
     (async function () {
-      const films = await getCachedFilmList()
-      setFilmList(films)
-    })()
+      const films = await getAllFilms();
+      setAllFilmsList(films);
+    })();
   }, []);
 
+  useEffect(() => {
+    const newFavorites = getFavoriteFilms(allFilmsList);
+    setFavoriteFilmsList(newFavorites);
+  }, [allFilmsList]);
+
   const favoriteToggle = (e) => {
-    updateAndSaveFilmList(e, filmList, setFilmList);
+    const { id } = e.target;
+    const newList = toggleFavorite(id, allFilmsList);
+    setAllFilmsList(newList);
   };
 
   return (
-    <div>
-      {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
-      <NavBar />
-      <Container>
-        {filmList.length &&
-          filmList.map((film) => {
-            return (
-              <FilmCard
-                key={film.episode_id}
-                favoriteToggle={favoriteToggle}
-                film={film}
-              />
-            );
-          })}
-      </Container>
-    </div>
+    <Router>
+      <div>
+        {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
+        <NavBar />
+        <Redirect from="/" to="/home" />
+        <Route
+          exact
+          path="/home"
+          render={() => (
+            <CardContainer
+              filmList={allFilmsList}
+              favoriteToggle={favoriteToggle}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/favorites"
+          render={() => (
+            <CardContainer
+              filmList={favoriteFilmsList}
+              favoriteToggle={favoriteToggle}
+            />
+          )}
+        />
+      </div>
+    </Router>
   );
 };
 

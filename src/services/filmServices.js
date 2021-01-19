@@ -1,33 +1,37 @@
-import SWAPI_URL from "../consts.js";
+import fetchAllFilms from "./ApiServices";
 
-const updateAndSaveFilmList = (e, filmList, setFilmList) => {
-  const newFilmList = updateFilmArray(e, filmList);
-  saveFilmListToLS(newFilmList);
-  setFilmList(newFilmList);
-};
-
-const fetchFilmList = async () => await (await fetch(SWAPI_URL)).json();
-
-const getListFromLS = () => window.localStorage.getItem('filmsArray');
-
-const getCachedFilmList = async () => {
-  const filmsArray = getListFromLS();
-  if(!filmsArray) {
-    const films = fetchFilmList();
-    saveFilmListToLS(films);
+const getAllFilms = async () => {
+  const filmsFromLS = getListFromLS();
+  if (filmsFromLS === null) {
+    const films = await fetchAllFilms();
+    saveListToLS(films);
     return films;
   }
-  return JSON.parse(filmsArray)
+  return JSON.parse(filmsFromLS);
+};
+
+const saveListToLS = (list) => {
+  window.localStorage.setItem("filmsArray", JSON.stringify(list));
+};
+
+const getListFromLS = () => {
+  return window.localStorage.getItem("filmsArray");
 };
 
 
-const updateFilmArray = (e, filmList) => {
-  const { id } = e.target;
+const toggleFavorite = (id, filmList) => {
+  const newFilmList = updateFilmArray(id, filmList);
+  saveListToLS(newFilmList);
+  return newFilmList;
+};
+
+const updateFilmArray = (id, filmList) => {
   const newFilmList = filmList.map((film) => {
     if (film.episode_id === parseInt(id)) {
-      const newFilm = { ...film };
-      newFilm.favorite = !newFilm.favorite;
-      return newFilm;
+      return {
+        ...film,
+        favorite: !film.favorite,
+      };
     } else {
       return film;
     }
@@ -35,44 +39,15 @@ const updateFilmArray = (e, filmList) => {
   return newFilmList;
 };
 
-const saveFilmListToLS = (list) => {
-  window.localStorage.setItem("filmsArray", JSON.stringify(list));
-};
-
-
-const getAndSetFilmList = async (setFilmList) => {
-  const response = fetchFilmList()
-  const filmsArray = response.results.map((film) => {
-    const {
-      title,
-      episode_id,
-      opening_crawl,
-      director,
-      producer,
-      release_date,
-    } = film;
-
-    return {
-      title,
-      episode_id,
-      opening_crawl,
-      director,
-      producer,
-      release_date,
-      favorite: false,
-      backgroundImage: "to be added",
-    };
-  });
-
-  saveFilmListToLS(filmsArray);
-  return filmsArray;
+const getFavoriteFilms = (filmsArray) => {
+  const favoriteFilms = filmsArray.filter((film) => film.favorite === true);
+  return favoriteFilms;
 };
 
 export {
-  getCachedFilmList,
-  getAndSetFilmList,
-  updateAndSaveFilmList,
-  saveFilmListToLS,
+  toggleFavorite,
+  getAllFilms,
   updateFilmArray,
-  getListFromLS
+  getListFromLS,
+  getFavoriteFilms,
 };

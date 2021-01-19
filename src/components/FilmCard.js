@@ -19,6 +19,7 @@ const Card = styled.div`
   margin: 40px;
   border-radius: 8px;
   opacity: 0.8;
+  box-shadow: 1px 1px 1px 1px #55565247 inset;
 `;
 
 const Button = styled.div`
