@@ -19,7 +19,7 @@ const NavBar = () => {
   return (
     <NavBarWrapper>
       <Link to="/home">Home</Link>
-      <Link to="/favorites">Favourites</Link>
+      <Link to="/favorites">Favorites</Link>
     </NavBarWrapper>
   );
 };

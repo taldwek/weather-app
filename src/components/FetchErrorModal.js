@@ -1,6 +1,6 @@
 import { ModalWrapper, ModalContent } from "../styles/genericStyles";
 
-const ErrorPage = () => {
+const FetchErrorModal = () => {
   return (
     <ModalWrapper>
       <ModalContent>
@@ -13,4 +13,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default FetchErrorModal;

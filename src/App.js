@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import ErrorPage from "./components/ErrorPage";
+import FetchErrorModal from "./components/FetchErrorModal";
 import WelcomeModal from "./components/WelcomeModal";
 import CardContainer from "./pages/CardContainer";
 import {
@@ -15,6 +15,7 @@ import {
   getFavoriteFilms,
 } from "./services/filmServices";
 import setShowModalHandler from "./services/modalServices";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
   const [allFilmsList, setAllFilmsList] = useState([]);
@@ -61,7 +62,7 @@ const App = () => {
   return (
     <Router>
       {errorInFetch ? (
-        <ErrorPage />
+        <FetchErrorModal />
       ) : (
         <div>
           {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
@@ -78,17 +79,19 @@ const App = () => {
                 />
               )}
             />
+
+            <Route
+              exact
+              path="/favorites"
+              render={() => (
+                <CardContainer
+                  filmList={favoriteFilmsList}
+                  favoriteToggle={favoriteToggle}
+                />
+              )}
+            />
+            <PageNotFound />
           </Switch>
-          <Route
-            exact
-            path="/favorites"
-            render={() => (
-              <CardContainer
-                filmList={favoriteFilmsList}
-                favoriteToggle={favoriteToggle}
-              />
-            )}
-          />
         </div>
       )}
     </Router>
