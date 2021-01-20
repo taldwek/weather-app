@@ -1,14 +1,13 @@
 import SWAPI_URL from "../consts.js";
-import imageUrlArray from "../styles/filmImagesMapping"
-
+import imageUrlArray from "../styles/filmImagesMapping";
 
 const fetchAllFilms = async () => {
-  let listfromAPI = null
+  let listfromAPI = null;
   try {
-   listfromAPI = await fetch(SWAPI_URL)
+    listfromAPI = await fetch(SWAPI_URL);
   } catch (err) {
-    console.log(err)
-    return []
+    console.log(err);
+    return [];
   }
   const response = await listfromAPI.json();
   const filmsArray = response.results.map(
@@ -19,10 +18,7 @@ const fetchAllFilms = async () => {
       director,
       producer,
       release_date,
-    }) =>
-    
-    {
-      console.log(imageUrlArray[episode_id-1])
+    }) => {
       return {
         title,
         episode_id,
@@ -31,7 +27,7 @@ const fetchAllFilms = async () => {
         producer,
         release_date,
         favorite: false,
-        imgUrl: imageUrlArray[episode_id-1]
+        imgUrl: imageUrlArray[episode_id - 1],
       };
     }
   );

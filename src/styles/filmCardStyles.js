@@ -41,16 +41,16 @@ const Crawl = styled.div`
   overflow: hidden;
   font-size: 80%;
   margin-top: 20px;
-  `;
-  
-  const Card = styled.div`
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: inherit;
-    margin-top: inherit;
-  `;
+`;
+
+const Card = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: inherit;
+  margin-top: inherit;
+`;
 
 const Fadeout = styled.div`
   position: absolute;
@@ -66,7 +66,7 @@ const imgStyle = {
   borderLeft: "2.5px solid #9c8721",
   width: "80%",
   height: "350px",
-  borderRadius: "0px 5px 5px 0px"
-}
+  borderRadius: "0px 5px 5px 0px",
+};
 
-export { imgStyle,Fadeout, Card, Crawl, CardContent, FavoriteButton }
+export { imgStyle, Fadeout, Card, Crawl, CardContent, FavoriteButton };

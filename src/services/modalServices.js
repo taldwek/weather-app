@@ -1,8 +1,8 @@
-import { getListFromLS } from "./filmServices"
+import { getListFromLS } from "./filmServices";
 
 const setShowModalHandler = () => {
-    const newUser = getListFromLS() ? false : true
-    return newUser
-}
+  const newUser = getListFromLS() ? false : true;
+  return newUser;
+};
 
-export default setShowModalHandler
+export default setShowModalHandler;

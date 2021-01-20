@@ -9,12 +9,9 @@
 body {
   height: 100vh;
   margin: auto 0;
-  background-image: url("./assets/images/background/background.jpg");
+  background-image: url("./assets/images/backgrounds/appBackground.jpg");
   color: white;
   font-family: "STARWARS";
   line-height: 1.2;
   letter-spacing: 1.1px;
 }
-
-
-

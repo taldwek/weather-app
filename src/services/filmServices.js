@@ -53,7 +53,7 @@ const errorToDisplay = (error, filmList) => {
       </h2>
     );
   } else if (!filmList.length) {
-    return <h2>Looks like you don't any favorites :(</h2>;
+    return <h2>Looks like you don't have any favorites :(</h2>;
   } else {
     return null;
   }

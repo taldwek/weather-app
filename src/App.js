@@ -48,7 +48,15 @@ const App = () => {
   return (
     <Router>
       <div>
-        {showModal && <WelcomeModal closeModal={() => setShowModal(false)} />}
+        {showModal && (
+          <WelcomeModal
+            closeModal={() => {
+              window.scroll(0, 0);
+              setShowModal(false);
+            }}
+          />
+        )}
+
         <NavBar />
         <Switch>
           <Redirect from="/" to="/home" exact />

@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 import styled from "styled-components";
-import { ModalWrapper, ModalContent } from "../styles/genericStyles";
+import { ModalWrapper, ModalContent } from "../styles/welcomeModalStyles";
 
 const ModalButton = styled.button`
   font-family: inherit;
@@ -9,7 +9,7 @@ const ModalButton = styled.button`
   padding: 0;
   width: 120px;
   min-height: 100px;
-  color: #ffe81f;
+  color: #b78c44;
   background-color: #010f03;
   margin-top: 30px;
   border-radius: 5px;
@@ -22,21 +22,27 @@ const ModalButton = styled.button`
   &:focus {
     outline: none !important;
   }
+  @media (max-height: 500px) {
+    display: none;
+  }
 `;
 
 const ModalHeader = styled.h1`
   margin-top: 10px;
-  `
+`;
 const ModalText = styled.p`
   margin-top: 10px;
-  `
+`;
 
 const WelcomeModal = ({ closeModal }) => {
   return (
     <ModalWrapper onClick={closeModal}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>Welcome to the world of Star Wars!</ModalHeader>
-        <ModalText>Browse through all the movies and save your favorite ones</ModalText>
+        <ModalText>
+          Browse through all the movies from the Star Wars Saga and save your
+          favorite ones
+        </ModalText>
         <ModalButton onClick={closeModal}>Let's Begin!</ModalButton>
       </ModalContent>
     </ModalWrapper>

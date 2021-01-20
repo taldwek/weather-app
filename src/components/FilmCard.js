@@ -1,5 +1,12 @@
 import React from "react";
-import { imgStyle,Fadeout, Card, Crawl, CardContent, FavoriteButton } from "../styles/filmCardStyles"
+import {
+  imgStyle,
+  Fadeout,
+  Card,
+  Crawl,
+  CardContent,
+  FavoriteButton,
+} from "../styles/filmCardStyles";
 
 const FilmCard = (props) => {
   const {
@@ -12,7 +19,6 @@ const FilmCard = (props) => {
     favorite,
     imgUrl,
   } = props.film;
-
 
   const { favoriteToggle } = props;
 
@@ -34,11 +40,7 @@ const FilmCard = (props) => {
           onClick={favoriteToggle}
         />
       </CardContent>
-      <img
-        src={imgUrl}
-        style={imgStyle}
-        alt={title}
-      />
+      <img src={imgUrl} style={imgStyle} alt={title} />
     </Card>
   );
 };
