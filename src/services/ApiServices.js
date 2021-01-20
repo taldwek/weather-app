@@ -1,5 +1,5 @@
 import SWAPI_URL from "../consts.js";
-import imageUrlArray from "../styles/filmImages"
+import imageUrlArray from "../styles/filmImagesMapping"
 
 
 const fetchAllFilms = async () => {

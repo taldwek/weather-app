@@ -9,26 +9,12 @@
 body {
   height: 100vh;
   margin: auto 0;
-  background-image: url("./assets/images/background.jpg");
+  background-image: url("./assets/images/background/background.jpg");
   color: white;
   font-family: "STARWARS";
   line-height: 1.2;
   letter-spacing: 1.1px;
 }
 
-a {
-  color: #d4c115;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  padding-left: 50px;
-  padding-right: 10px;
-  text-decoration: none;
-  font-size: x-large;
-}
-a:hover {
-  cursor: pointer;
-}
-a:active {
-  transform: translate(2px, 2px);
-}
+
+

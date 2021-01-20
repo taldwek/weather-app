@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../assets/images/background.jpg";
+import img from "../assets/images/background/background.jpg";
 
 const ModalWrapper = styled.dialog`
   overflow: hidden;
