@@ -1,4 +1,6 @@
 import SWAPI_URL from "../consts.js";
+import imageUrlArray from "../styles/filmImages"
+
 
 const fetchAllFilms = async () => {
   let listfromAPI = null
@@ -17,7 +19,10 @@ const fetchAllFilms = async () => {
       director,
       producer,
       release_date,
-    }) => {
+    }) =>
+    
+    {
+      console.log(imageUrlArray[episode_id-1])
       return {
         title,
         episode_id,
@@ -25,7 +30,8 @@ const fetchAllFilms = async () => {
         director,
         producer,
         release_date,
-        favorite: false
+        favorite: false,
+        imgUrl: imageUrlArray[episode_id-1]
       };
     }
   );

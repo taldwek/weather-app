@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import unlikeButton from "../assets/images/solid-star.svg";
 import likeButton from "../assets/images/regular-star.svg";
-import newHope from "../assets/images/new-hope.webp";
+
 
 const CardContent = styled.div`
   display: flex;
@@ -43,47 +43,52 @@ const Crawl = styled.div`
   overflow: hidden;
   font-size: 80%;
   margin-top: 20px;
-`;
-
-const Fadeout = styled.div`
+  `;
+  
+  const Fadeout = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 50px;
   background: linear-gradient(rgba(40, 39, 39, 0) 0%, rgba(40, 39, 39, 1) 100%);
-`;
-
-const FilmCard = (props) => {
-  const {
-    title,
-    episode_id,
-    opening_crawl,
-    director,
-    producer,
-    release_date,
-    favorite,
-  } = props.film;
-
-  const { favoriteToggle } = props;
-
-  const Card = styled.div`
+  `;
+  
+  const FilmCard = (props) => {
+    const {
+      title,
+      episode_id,
+      opening_crawl,
+      director,
+      producer,
+      release_date,
+      favorite,
+      imgUrl
+    } = props.film;
+    
+    const { favoriteToggle } = props;
+    
+    const Card = styled.div`
     display: grid;
     grid-template-columns: 3fr 2fr;
     align-items: center;
     justify-content: center;
     margin-bottom: inherit;
     margin-top: inherit;
-  `;
+    `;
 
-  const Img = styled.img.attrs({
-    src: newHope,
-  })`
-    width: 80%;
-    height: 350px;
-  `;
-
-  return (
-    <Card>
+    const Img = styled.img.attrs({
+      src: imgUrl,
+    })`
+      width: 80%;
+      height: 350px;
+    `;
+  
+    
+    console.log(imgUrl)
+    
+    
+    return (
+      <Card>
       <CardContent>
         <h4>{title}</h4>
         <div>Release Date: {release_date}</div>
