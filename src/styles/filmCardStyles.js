@@ -64,7 +64,7 @@ const imgStyle = {
   position: "relative",
   left: "0.1px",
   borderLeft: "2.5px solid #9c8721",
-  width: "80%",
+  width: "90%",
   height: "350px",
   borderRadius: "0px 5px 5px 0px",
 };
