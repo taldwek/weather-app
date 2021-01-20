@@ -45,18 +45,16 @@ const getFavoriteFilms = (filmsArray) => {
 };
 
 const errorToDisplay = (error, filmList) => {
-  if (error) {
-    return (
-      <h2>
-        Oooops, it seems like we're having issues with retrieving data at this
-        time. Please come back later!
-      </h2>
-    );
-  } else if (!filmList.length) {
-    return <h2>Looks like you don't have any favorites :(</h2>;
-  } else {
-    return null;
-  }
+  // let result = null;
+
+  return error ? (
+    <h2>
+      Oooops, it seems like we're having issues with retrieving data at this
+      time. Please come back later!
+    </h2>
+  ) : !filmList.length ? (
+    <h2>Looks like you don't have any favorites :(</h2>
+  ) : null;
 };
 
 export {
