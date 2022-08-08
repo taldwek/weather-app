@@ -1,17 +1,9 @@
-@font-face {
-  font-family: "STARWARS";
-  src: url("./assets/fonts/STARWARS.woff") format("woff"),
-    url("./assets/fonts/STARWARS.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
-  height: 100vh;
+  min-height: 100%;
   margin: auto 0;
-  background-image: url("./assets/images/backgrounds/appBackground.jpg");
   color: white;
-  font-family: "STARWARS";
   line-height: 1.2;
   letter-spacing: 1.1px;
+  font-family: "fantasy";
+
 }

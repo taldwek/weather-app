@@ -1,37 +1,21 @@
-import SWAPI_URL from "../consts.js";
-import imageUrlArray from "../styles/filmImagesMapping";
+import API_KEY from "../consts.js";
 
-const fetchAllFilms = async () => {
-  let listfromAPI = null;
+const fetchWeather = async (cityName) => {
+  const currentWeatherAPI = `https://api.weatherbit.io/v2.0/current?city=${cityName}&key=${API_KEY}`;
+  const forecastWeatherAPI = `https://api.weatherbit.io/v2.0/forecast/hourly?city=${cityName}&key=${API_KEY}`;
+  let weatherFromAPI = {};
   try {
-    listfromAPI = await fetch(SWAPI_URL);
+    weatherFromAPI.currentWeather = await (
+      await fetch(currentWeatherAPI)
+    ).json();
+    weatherFromAPI.forecastWeather = await (
+      await fetch(forecastWeatherAPI)
+    ).json();
   } catch (err) {
     console.log(err);
-    return [];
+    return {};
   }
-  const response = await listfromAPI.json();
-  const filmsArray = response.results.map(
-    ({
-      title,
-      episode_id,
-      opening_crawl,
-      director,
-      producer,
-      release_date,
-    }) => {
-      return {
-        title,
-        episode_id,
-        opening_crawl,
-        director,
-        producer,
-        release_date,
-        favorite: false,
-        imgUrl: imageUrlArray[episode_id - 1],
-      };
-    }
-  );
-  return filmsArray;
+  return weatherFromAPI;
 };
 
-export default fetchAllFilms;
+export default fetchWeather;

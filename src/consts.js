@@ -1,3 +1,3 @@
-const SWAPI_URL = "https://swapi.dev/api/films/";
+const API_KEY = "b1b4654264294e888600b1fbdd25c99f";
 
-export default SWAPI_URL
+export default API_KEY;

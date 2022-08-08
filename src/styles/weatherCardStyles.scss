@@ -1,0 +1,67 @@
+.weather-card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50vw;
+  height: 40vh;
+  padding: 20px;
+  background: rgb(24 43 46);
+  margin-left: 40px;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  opacity: 0.8;
+
+  .current-weather {
+    .weather-icon {
+      height: 50px;
+      position: absolute;
+      left: 90px;
+      top: 10px;
+    }
+  }
+
+  .forecast-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    overflow-x: auto;
+
+    .forecast-item {
+      max-width: 200px;
+      flex-shrink: 0;
+      height: 160px;
+      margin: 0 20px;
+      border-radius: 20px;
+      background-color: rgb(28 198 210 / 18%);
+      padding: 20px;
+      box-shadow: 5px 5px 5px #070101;
+    }
+  }
+}
+
+.favorite-button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  margin: 12px;
+  top: 0;
+  right: 0;
+  border: none;
+  background: url("../assets/images/favoriteIcons/regular-star.svg") no-repeat
+    center center;
+
+  &.inFavorites {
+    background: url("../assets/images/favoriteIcons/solid-star.svg") no-repeat
+      center center;
+  }
+
+  background-size: cover !important;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    transform: translate(2px, 2px);
+  }
+}

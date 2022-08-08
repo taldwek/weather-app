@@ -1,0 +1,41 @@
+.app {
+  min-height: 100vh;
+}
+
+#dark {
+  background-color: rgb(2, 7, 30);
+
+  .switch {
+    label {
+      font-weight: bolder;
+      margin: 10px;
+      color: #fff;
+    }
+  }
+}
+
+#light {
+  background-color: antiquewhite;
+
+  .switch {
+    label {
+      font-weight: bolder;
+      margin: 10px;
+      color: black;
+    }
+  }
+}
+
+.switch {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    font-weight: bolder;
+    margin: 10px;
+    color: black;
+  }
+}
