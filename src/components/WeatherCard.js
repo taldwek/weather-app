@@ -2,7 +2,6 @@ import React from "react";
 import FavoriteButton from "./FavoriteButton";
 
 import "../styles/weatherCardStyles.scss";
-import { parse } from "@fortawesome/fontawesome-svg-core";
 
 const WeatherCard = (props) => {
   const { weather, favoriteToggle } = props;
