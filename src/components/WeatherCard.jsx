@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import FavoriteButton from "./FavoriteButton";
 
 import "../styles/weatherCardStyles.scss";
 
 const WeatherCard = (props) => {
   const { weather, favoriteToggle } = props;
-  console.log(weather)
+  const ref = useRef(null)
+
+  const scroll = (scrollOffset) => {
+    ref.current.scrollLeft += scrollOffset;
+  };
 
   const renderFavoriteButton = () => {
     return (
@@ -32,7 +36,8 @@ const WeatherCard = (props) => {
         <p>{weather.currentWeather.generalWeather.description}</p>
         {favoriteToggle && renderFavoriteButton()}
       </div>
-      <div className="forecast-container">
+      <div className="forecast-container" ref={ref}>
+      <div className="scroll-left" onClick={() => scroll(-100)}></div>
         {weather.forecastWeather.map((item, i) => {
           return (
             <div className="forecast-item" key={i}>
@@ -41,7 +46,8 @@ const WeatherCard = (props) => {
             </div>
           );
         })}
-      </div>
+        <div className="scroll-right" onClick={() => scroll(+100)}></div>
+    </div>
     </div>
   );
 };

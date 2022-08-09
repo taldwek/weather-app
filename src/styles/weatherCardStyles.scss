@@ -13,7 +13,7 @@
   opacity: 0.8;
 
   .current-weather {
-    margin-bottom :20px;
+    margin-bottom: 20px;
 
     .weather-icon {
       height: 50px;
@@ -28,6 +28,33 @@
     height: auto;
     display: flex;
     overflow-x: auto;
+
+    div {
+
+      &.scroll-right {
+        position: absolute;
+        bottom: 65px;
+        right: 5px;
+        height: 75px;
+        width: 60px;
+        scroll-behavior: smooth;
+        background-image: url('../assets/images/right-arrow.png');
+        background-size: cover;
+        cursor: pointer;
+      }
+
+      &.scroll-left {
+        position: absolute;
+        bottom: 65px;
+        left: -5px;
+        height: 75px;
+        width: 60px;
+        scroll-behavior: smooth;
+        background-image: url('../assets/images/left-arrow.png');
+        background-size: cover;
+        cursor: pointer;
+      }
+    }
 
     .forecast-item {
       max-width: 200px;
@@ -50,11 +77,11 @@
   top: 0;
   right: 0;
   border: none;
-  background: url("../assets/images/favoriteIcons/regular-star.svg") no-repeat
+  background: url('../assets/images/favoriteIcons/regular-star.svg') no-repeat
     center center;
 
   &.inFavorites {
-    background: url("../assets/images/favoriteIcons/solid-star.svg") no-repeat
+    background: url('../assets/images/favoriteIcons/solid-star.svg') no-repeat
       center center;
   }
 

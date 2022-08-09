@@ -36,7 +36,6 @@ const getWeatherFavoritesFromLS = () => {
 const standartize = (str) => str.replace(/\s/g, '').toLowerCase().trim();
 
 const compareCityToFavorites = (id, favoriteWeatherList) => {
-  debugger;
   return favoriteWeatherList.find((weather) => {
     return standartize(weather.currentWeather.city) === standartize(id);
   });
