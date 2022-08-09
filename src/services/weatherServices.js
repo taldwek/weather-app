@@ -1,4 +1,4 @@
-import fetchWeather from "./ApiServices";
+import fetchWeather from './ApiServices';
 
 const getWeatherByLocation = async (cityName) => {
   let returnedWeather = {};
@@ -30,45 +30,42 @@ const getWeatherByLocation = async (cityName) => {
 };
 
 const getWeatherFavoritesFromLS = () => {
-  return window.localStorage.getItem("weatherFavorites");
+  return window.localStorage.getItem('weatherFavorites');
+};
+
+const standartize = (str) => str.replace(/\s/g, '').toLowerCase().trim();
+
+const compareCityToFavorites = (id, favoriteWeatherList) => {
+  debugger;
+  return favoriteWeatherList.find((weather) => {
+    return standartize(weather.currentWeather.city) === standartize(id);
+  });
 };
 
 const updateWeatherFavoritesLS = (weatherObject, favoriteWeatherList) => {
   const id = weatherObject.currentWeather.city;
-  let newFavoriteWeatherList = [];
-  if (weatherObject.favorite) {
-    if (!favoriteWeatherList.length) {
-      newFavoriteWeatherList.push(weatherObject);
-      return newFavoriteWeatherList;
-    } else {
-      favoriteWeatherList.push(weatherObject);
+  const markAsFavorite = weatherObject.favorite;
+  let newFavoriteWeatherList = [...favoriteWeatherList];
+  if (markAsFavorite) {
+    const isCityInFavorites = compareCityToFavorites(id, favoriteWeatherList);
+    if (isCityInFavorites) {
       return favoriteWeatherList;
     }
+    newFavoriteWeatherList.push(weatherObject);
+    return newFavoriteWeatherList;
+  } else {
+    newFavoriteWeatherList = favoriteWeatherList.filter((weather) => {
+      return (
+        weather.currentWeather.city.replace(/\s/g, '').toLowerCase().trim() !==
+        id.replace(/\s/g, '').toLowerCase().trim()
+      );
+    });
+    return newFavoriteWeatherList;
   }
-  newFavoriteWeatherList = favoriteWeatherList.filter((weather) => {
-    return (
-      weather.currentWeather.city.replace(/\s/g, "").toLowerCase().trim() !==
-      id.replace(/\s/g, "").toLowerCase().trim()
-    );
-  });
-  return newFavoriteWeatherList;
 };
-
-// const errorToDisplay = (error, filmList) => {
-
-//   return error ? (
-//     <h2>
-//       Oooops, it seems like we're having issues with retrieving data at this
-//       time. Please come back later!
-//     </h2>
-//   ) : !filmList.length ? (
-//     <h2>Looks like you don't have any favorites :(</h2>
-//   ) : null;
-// };
 
 export {
   getWeatherByLocation,
   updateWeatherFavoritesLS,
   getWeatherFavoritesFromLS,
-  // errorToDisplay,
 };
