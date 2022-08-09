@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 50vw;
-  height: 40vh;
+  height: 30vh;
   padding: 20px;
   background: rgb(24 43 46);
   margin-left: 40px;
@@ -30,7 +30,7 @@
     .forecast-item {
       max-width: 200px;
       flex-shrink: 0;
-      height: 160px;
+      max-height: 120px;
       margin: 0 20px;
       border-radius: 20px;
       background-color: rgb(28 198 210 / 18%);
