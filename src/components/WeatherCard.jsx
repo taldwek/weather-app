@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import FavoriteButton from "./FavoriteButton";
 
-import "../styles/weatherCardStyles.scss";
+import "../styles/weatherCard.scss";
 
 const WeatherCard = (props) => {
   const { weather, favoriteToggle } = props;

@@ -12,7 +12,7 @@
 
   .nav-link {
     display: flex;
-    color: #306c00;
+    color: #39609b;
     font-weight: 700;
     width: 250px;
     justify-content: center;
@@ -20,7 +20,7 @@
     align-items: center;
     padding: 0px;
     text-decoration: none;
-    font-size: x-large;
+    font-size: 30px;
 
     &:hover {
       cursor: pointer;
@@ -29,12 +29,12 @@
       transform: translate(2px, 2px);
     }
     &.active {
-      border-bottom: 2px solid #b78c44;
+      border-bottom: 5px solid #39609b;
     }
   }
 
   h1 {
-    color: #306c00;
+    color: #39609b;
     font-weight: 700;
     font-size: 2em;
     margin-right: auto;

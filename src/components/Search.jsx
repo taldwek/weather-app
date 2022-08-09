@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "../styles/searchBoxStyles.scss";
+import "../styles/searchBox.scss";
 
 const Search = (props) => {
   const [location, setLocation] = useState("");

@@ -15,9 +15,10 @@ input {
   background: #f2f2f2;
   padding: var(--field-padding);
   border-radius: 5px 0 0 5px;
-  width: 250px;
+  width: 300px;
+  height: 20px;
   outline: none;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .placeholder {
@@ -63,7 +64,6 @@ input {
   }
 }
 
-.search-field input.dirty + .placeholder,
 .search-field input:focus + .placeholder,
 .search-field input:not(:placeholder-shown) + .placeholder {
   top: -10px;
