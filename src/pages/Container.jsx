@@ -12,7 +12,9 @@ const Container = ({
 }) => {
   return (
     <div className="container">
-      {!favoritesPage && <Search searchHandler={searchHandler} />}
+      {!favoritesPage && <> <Search searchHandler={searchHandler} />
+      {!weather &&  <div className="no-query">Search for the weather in any city in the world! Click the star icon to save a city to Your Locations</div> }
+      </>}
       {weather ? (
         <WeatherCard favoriteToggle={favoriteToggle} weather={weather} />
       ) : (

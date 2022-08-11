@@ -118,7 +118,6 @@ const App = () => {
             )}
           />
         </Switch>
-        {!weather && <div className="no-query">Search for the weather in any city in the world! Click the star icon to save a city to Your Locations</div> }
         {errorInFetch && <div className="error" >We're sorry please try searching for a different location</div>}
       </div>
     </Router>
