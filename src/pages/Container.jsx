@@ -11,7 +11,7 @@ const Container = ({
   favoritesPage,
 }) => {
   return (
-    <div className="home-container">
+    <div className="container">
       {!favoritesPage && <Search searchHandler={searchHandler} />}
       {weather ? (
         <WeatherCard favoriteToggle={favoriteToggle} weather={weather} />

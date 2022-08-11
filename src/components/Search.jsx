@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
-import "../styles/searchBox.scss";
+import "../styles/search.scss";
 
-const Search = (props) => {
-  const [location, setLocation] = useState("");
+const Search = ({ searchHandler }) => {
+  const [searchQuery, setSearchQuery] = useState("");
 
   const inputChangeHandler = (e) => {
     const { value } = e.target;
-    setLocation(value);
+    setSearchQuery(value);
   };
 
-  const searchHandler = () => {
-    props.searchHandler(location);
+  const queryWeather = () => {
+    searchHandler(searchQuery);
   };
 
   return (
@@ -19,12 +19,12 @@ const Search = (props) => {
       <input
         type="url"
         onChange={inputChangeHandler}
-        value={location}
+        value={searchQuery}
         placeholder="&nbsp;"
       />
       <span className="placeholder">Enter location</span>
       <div className="search-icon-container">
-        <button className="search-icon" onClick={searchHandler}></button>
+        <button className="search-icon" onClick={queryWeather}></button>
       </div>
     </label>
   );

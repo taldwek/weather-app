@@ -68,14 +68,14 @@ const App = () => {
     return debounce(searchHandler, 3000);
   }, []);
 
-  // useEffect(() => {
-  //   if (weatherIsValid) {
-  //   const interval = setInterval(async () => {
-  //     getAndSetWeather(location)
-  //   } ,5000);
-  //   return () => clearTimeout(interval);
-  //   }
-  // });
+  useEffect(() => {
+    if (weather) {
+    const interval = setInterval(async () => {
+      getAndSetWeather(weather.location)
+    } ,5000);
+    return () => clearTimeout(interval);
+    }
+  });
 
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
@@ -87,7 +87,7 @@ const App = () => {
         <NavBar />
         <div className="switch">
           <label>
-            {theme === "dark" ? "Toggle to light mode" : "Toggle to dark mode"}
+            {theme === "dark" ? "Light mode" : "Dark mode"}
           </label>
           <ReactSwitch onChange={toggleTheme} checked={theme === "dark"} />
         </div>
@@ -118,6 +118,8 @@ const App = () => {
             )}
           />
         </Switch>
+        {!weather && <div className="no-query">Search for the weather in any city in the world! Click the star icon to save a city to Your Locations</div> }
+        {errorInFetch && <div className="error" >We're sorry please try searching for a different location</div>}
       </div>
     </Router>
   );

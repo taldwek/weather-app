@@ -5,17 +5,18 @@ import { useLocation } from "react-router-dom";
 import "../styles/navbar.scss";
 
 const NavBar = () => {
-  let location = useLocation();
-  let path = location.pathname;
+  const location = useLocation();
+  const path = location.pathname;
+  const isActive = (page) => path === page && page
 
   return (
     <div className="navbar-wrapper">
       <h1>Weather App</h1>
-      <Link className={`nav-link ${path === "/home" && "active"}`} to="/home">
+      <Link className={`nav-link ${isActive('/home')}`} to="/home">
         Home
       </Link>
       <Link
-        className={`nav-link ${path === "/favorites" && "active"}`}
+        className={`nav-link ${isActive('/favorites')}`}
         to="/favorites"
       >
         Your Locations
