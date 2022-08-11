@@ -73,7 +73,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       weather && !inSearch && getAndSetWeather(weather.currentWeather.city)
-    } ,10000);
+    } ,15000);
     return () => clearTimeout(interval);
     }
   );
