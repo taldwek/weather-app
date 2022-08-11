@@ -71,7 +71,7 @@ const App = () => {
   useEffect(() => {
     if (weather) {
     const interval = setInterval(async () => {
-      getAndSetWeather(weather.location)
+      getAndSetWeather(weather.currentWeather.city)
     } ,5000);
     return () => clearTimeout(interval);
     }
