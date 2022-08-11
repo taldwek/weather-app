@@ -24,6 +24,7 @@ const App = () => {
   const [errorInFetch, setErrorInFetch] = useState(false);
   const [favoriteState, setFavoriteState] = useState(true);
   const [theme, setTheme] = useState("light");
+  const [inSearch, setInSearch] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -47,6 +48,7 @@ const App = () => {
   }, [favoriteState]);
 
   const getAndSetWeather = async (location) => {
+    setInSearch(true)
     const weatherData = await getWeatherByLocation(location);
     if (Object.keys(weatherData).length) {
       setWeather(weatherData);
@@ -69,13 +71,12 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (weather) {
     const interval = setInterval(async () => {
-      getAndSetWeather(weather.currentWeather.city)
-    } ,5000);
+      weather && !inSearch && getAndSetWeather(weather.currentWeather.city)
+    } ,10000);
     return () => clearTimeout(interval);
     }
-  });
+  );
 
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
