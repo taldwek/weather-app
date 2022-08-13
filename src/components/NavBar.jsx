@@ -7,7 +7,7 @@ import "../styles/navbar.scss";
 const NavBar = () => {
   const location = useLocation();
   const path = location.pathname;
-  const isActive = (page) => path === page && page
+  const isActive = (page) => path === page && 'active'
 
   return (
     <div className="navbar-wrapper">

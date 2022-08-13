@@ -17,6 +17,15 @@
 #dark {
   background-color: rgb(2, 7, 30);
 
+  .container {
+    .no-saved-locations {
+      color: white;
+    }
+    .no-query {
+      color: white;
+    }
+  }
+
   .switch {
     .react-switch-bg {
       background: rgb(94 109 122) !important;

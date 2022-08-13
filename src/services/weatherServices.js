@@ -1,5 +1,7 @@
 import fetchWeather from './ApiServices';
 
+// Runs when search is performed, returns a weather object provided by the ApiService
+
 const getWeatherByLocation = async (cityName) => {
   let returnedWeather = {};
   try {
@@ -44,23 +46,30 @@ const compareCityToFavorites = (id, favoriteWeatherList) => {
 const updateWeatherFavoritesLS = (weatherObject, favoriteWeatherList) => {
   const id = weatherObject.currentWeather.city;
   const markAsFavorite = weatherObject.favorite;
-  let newFavoriteWeatherList = [...favoriteWeatherList];
-  if (markAsFavorite) {
-    const isCityInFavorites = compareCityToFavorites(id, favoriteWeatherList);
-    if (isCityInFavorites) {
-      return favoriteWeatherList;
+
+  const newFavorites = () => {
+    let newFavoriteWeatherList = favoriteWeatherList ? [...favoriteWeatherList] : []
+    if (markAsFavorite) {
+      const isCityInFavorites = compareCityToFavorites(id, favoriteWeatherList);
+      if (isCityInFavorites) {
+        return favoriteWeatherList;
+      }
+      newFavoriteWeatherList.push(weatherObject);
+      localStorage.setItem("weatherFavorites", JSON.stringify(newFavoriteWeatherList));
+      return newFavoriteWeatherList;
+    } else {
+      newFavoriteWeatherList = favoriteWeatherList.filter((weather) => {
+        return (
+          standartize(weather.currentWeather.city) !==
+          standartize(id)
+        );
+      });
+      localStorage.setItem("weatherFavorites", JSON.stringify(newFavorites));
+      return newFavoriteWeatherList;
     }
-    newFavoriteWeatherList.push(weatherObject);
-    return newFavoriteWeatherList;
-  } else {
-    newFavoriteWeatherList = favoriteWeatherList.filter((weather) => {
-      return (
-        weather.currentWeather.city.replace(/\s/g, '').toLowerCase().trim() !==
-        id.replace(/\s/g, '').toLowerCase().trim()
-      );
-    });
-    return newFavoriteWeatherList;
   }
+
+  return newFavorites()
 };
 
 export {

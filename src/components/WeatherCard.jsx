@@ -42,7 +42,7 @@ const WeatherCard = ({ weather, favoriteToggle }) => {
         )}
       </div>
       <div className="forecast-container" ref={ref}>
-        <div className="scroll-left" onClick={() => scroll(-100)}></div>
+        <div className="scroll-left" onClick={() => scroll(-600)}></div>
         {weather.forecastWeather.map((item, i) => {
           return (
             <div className="forecast-item" key={i}>
@@ -55,7 +55,7 @@ const WeatherCard = ({ weather, favoriteToggle }) => {
             </div>
           );
         })}
-        <div className="scroll-right" onClick={() => scroll(+100)}></div>
+        <div className="scroll-right" onClick={() => scroll(+600)}></div>
       </div>
     </div>
   );

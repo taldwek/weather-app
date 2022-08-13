@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
 } from "react-router-dom";
-import debounce from "lodash.debounce";
+import throttle from "lodash.debounce";
+import ReactSwitch from "react-switch";
 
 import NavBar from "./components/NavBar";
 import Container from "./pages/Container";
@@ -14,7 +15,6 @@ import {
   getWeatherFavoritesFromLS,
   updateWeatherFavoritesLS,
 } from "./services/weatherServices";
-import ReactSwitch from "react-switch";
 
 import "./styles/app.scss";
 
@@ -26,11 +26,8 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   const [inSearch, setInSearch] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      debouncedSearch.cancel();
-    };
-  });
+  // On first render - fetch favorites from localStorage and set favoriteWeatherList
+  // Save/remove favorite from localStorage if favoriteState has changed, and update favoriteWeatherList 
 
   useEffect(() => {
     if (weather) {
@@ -38,7 +35,6 @@ const App = () => {
         weather,
         favoriteWeatherList
       );
-      localStorage.setItem("weatherFavorites", JSON.stringify(newFavorites));
       setFavoriteWeatherList(newFavorites);
     } else {
       const favoriteWeatherFromLS = getWeatherFavoritesFromLS();
@@ -47,36 +43,54 @@ const App = () => {
     }
   }, [favoriteState]);
 
-  const getAndSetWeather = async (location) => {
-    setInSearch(true)
+  // Fetch updated data every 15 seconds and set the state accordingly. 
+  // getAndSetWeather will be invoked only if weather is truthy (a query was successful), and there is no search in progress (in order to ensure the correct 'weather' staten is being used)
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      weather && !inSearch && getAndSetWeather(weather.currentWeather.city, true)
+    } ,15000);
+    return () => clearTimeout(interval);
+    }
+  );
+
+  // Following a search, updates the inSearch state, gets and sets the new weather value. Sets errorInFetch if search is unsuccessful
+
+  const getAndSetWeather = async (location, fromInterval = false) => {
+    if (!fromInterval) {
+      setInSearch(true)
+    }
     const weatherData = await getWeatherByLocation(location);
     if (Object.keys(weatherData).length) {
       setWeather(weatherData);
+      if (errorInFetch) {
+        setErrorInFetch(false);
+      }
     } else {
+      setWeather("");
       setErrorInFetch(true);
     }
+    setInSearch(false);
   };
+
+  // Search handler
 
   const searchHandler = (location) => {
     getAndSetWeather(location);
   };
+
+  // throttle search to be performed at most once every 1 seconds, using lodash throttle method
+
+  const throttledSearch = throttle(searchHandler, 1000);
+
+  // Toggle favoriteState for an item
 
   const favoriteToggle = () => {
     setWeather({ ...weather, favorite: !weather.favorite });
     setFavoriteState(!favoriteState);
   };
 
-  const debouncedSearch = useMemo(() => {
-    return debounce(searchHandler, 3000);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      weather && !inSearch && getAndSetWeather(weather.currentWeather.city)
-    } ,15000);
-    return () => clearTimeout(interval);
-    }
-  );
+  // Toggle Theme (dark/light mode)
 
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
@@ -102,7 +116,8 @@ const App = () => {
                 errorInFetch={errorInFetch}
                 weather={weather}
                 favoriteToggle={favoriteToggle}
-                searchHandler={debouncedSearch}
+                searchHandler={throttledSearch}
+                inSearch={inSearch}
               />
             )}
           />
@@ -118,6 +133,7 @@ const App = () => {
               />
             )}
           />
+         <Redirect to ="/" />
         </Switch>
         {errorInFetch && <div className="error" >We're sorry please try searching for a different location</div>}
       </div>

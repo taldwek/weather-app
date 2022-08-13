@@ -11,7 +11,7 @@ const Search = ({ searchHandler }) => {
   };
 
   const queryWeather = () => {
-    searchHandler(searchQuery);
+    searchQuery && searchHandler(searchQuery);
   };
 
   return (
