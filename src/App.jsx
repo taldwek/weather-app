@@ -42,7 +42,7 @@ const App = () => {
       setFavoriteWeatherList(newFavorites);
     } else {
       const favoriteWeatherFromLS = getWeatherFavoritesFromLS();
-      favoriteWeatherFromLS &&
+      favoriteWeatherFromLS !== "undefined" && 
         setFavoriteWeatherList(JSON.parse(favoriteWeatherFromLS));
     }
   }, [favoriteState]);
