@@ -9,19 +9,22 @@ const Container = ({
   searchHandler,
   favoriteWeatherList,
   favoritesPage,
+  errorInFetch,
+  inSearch
 }) => {
   return (
     <div className="container">
       {!favoritesPage && <> <Search searchHandler={searchHandler} />
-      {!weather &&  <div className="no-query">Search for the weather in any city in the world! Click the star icon to save a city to Your Locations</div> }
+      {!weather && !errorInFetch && !inSearch && <div className="no-query">Search for the weather in any city in the world! Click the star icon to save a city to Your Locations</div> }
+      {inSearch && <div className="loader"></div>}
       </>}
-      {weather ? (
+      {weather && !inSearch ? (
         <WeatherCard favoriteToggle={favoriteToggle} weather={weather} />
       ) : (
-        favoriteWeatherList?.length &&
+        favoriteWeatherList?.length ?
         favoriteWeatherList.map((item, i) => {
-          return <WeatherCard weather={item} key={i} />;
-        })
+          return <WeatherCard favoriteToggle={favoriteToggle} weather={item} key={i} />;
+        }) : favoritesPage && <div>You have no saved locations yet :(</div>
       )}
     </div>
   );
