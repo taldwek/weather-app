@@ -48,9 +48,10 @@ const updateWeatherFavoritesLS = (weatherObject, favoriteWeatherList) => {
   const markAsFavorite = weatherObject.favorite;
 
   const newFavorites = () => {
-    let newFavoriteWeatherList = favoriteWeatherList ? [...favoriteWeatherList] : []
+    let newFavoriteWeatherList = favoriteWeatherList ? [...favoriteWeatherList] : []  
+    debugger;
     if (markAsFavorite) {
-      const isCityInFavorites = compareCityToFavorites(id, favoriteWeatherList);
+      const isCityInFavorites = compareCityToFavorites(id, newFavoriteWeatherList);
       if (isCityInFavorites) {
         return favoriteWeatherList;
       }
